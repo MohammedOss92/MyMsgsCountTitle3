@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.messages.abdallah.mymessages.ViewModel.MsgsViewModel
 import com.messages.abdallah.mymessages.ViewModel.MyViewModelFactory
 import com.messages.abdallah.mymessages.ViewModel.ViewModelFactory
@@ -78,8 +80,11 @@ class SecondFragment : Fragment() {
 
 
         viewModel.getMsgsFromRoom_by_id(argsId,requireContext()).observe(viewLifecycleOwner) { listShows ->
-            msgsAdapter.msgsModel = listShows
-            binding.rcMsgs.adapter = msgsAdapter
+            msgsAdapter.stateRestorationPolicy=RecyclerView.Adapter.StateRestorationPolicy.ALLOW
+            if(binding.rcMsgs.adapter == null) {
+                msgsAdapter.msgsModel = listShows
+                binding.rcMsgs.adapter = msgsAdapter
+            }
         }
     }
 }

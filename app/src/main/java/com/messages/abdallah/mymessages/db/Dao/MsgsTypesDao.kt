@@ -39,13 +39,7 @@ interface MsgsTypesDao {
     fun deleteALlPosts()
 
     @Query(
-        "SELECT e.subCount AS subCount, c.* " +
-                "FROM msgTypes c " +
-                "LEFT JOIN ( " +
-                "   SELECT TypeDescription, COUNT(*) subCount " +
-                "   from msg " +
-                "   GROUP BY TypeDescription) e " +
-                "ON e.TypeDescription = c.TypeID"
+        "select c.*, count(e.ID_Type_id) as subCount from msg_types_table c left join msg_table e on  c.id = e.ID_Type_id group by c.id"
     )
-    suspend fun getAllMsgTypesWithCounts(): LiveData<List<MsgsTypeWithCount?>?>?
+    suspend fun getAllMsgTypesWithCounts(): List<MsgsTypeWithCount>?
 }

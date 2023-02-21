@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.messages.abdallah.mymessages.api.ApiService
 import com.messages.abdallah.mymessages.models.MsgsModel
+import com.messages.abdallah.mymessages.models.MsgsTypeWithCount
 import com.messages.abdallah.mymessages.models.MsgsTypesModel
 import com.messages.abdallah.mymessages.repository.MsgsRepo
 import com.messages.abdallah.mymessages.repository.MsgsTypesRepo
@@ -32,6 +33,10 @@ class MsgsTypesViewModel constructor(
     private val _response = MutableLiveData<List<MsgsTypesModel>>()
     val responseMsgsTypes: LiveData<List<MsgsTypesModel>>
         get() = _response
+
+    private val _responseWithCounts = MutableLiveData<List<MsgsTypeWithCount>>()
+    val responseMsgsTypesWithCountt: LiveData<List<MsgsTypeWithCount>>
+        get() = _responseWithCounts
 
 
     suspend fun getAllMsgsTypes(context: MainActivity): MutableLiveData<List<MsgsTypesModel>> {
@@ -87,6 +92,33 @@ class MsgsTypesViewModel constructor(
             }
         }
         return _response
+    }
+
+    fun getPostsFromRoomWithCounts(context: MainActivity): MutableLiveData<List<MsgsTypeWithCount>> {
+        viewModelScope.launch {
+            val response = msgsTypesRepo.getMsgsTypesWithCount()
+            withContext(Dispatchers.Main) {
+                response?.let {
+                    if (it.isEmpty()) {
+                        Log.i("TestRoom", "getPostsFromRoom: will cal api")
+                        //no data in database so will call data from API
+                        if (internetCheck(context)) {
+                            getAllMsgsTypes(context)
+                        } else {
+                            Toast.makeText(
+                                context,
+                                "please check your internet connection..",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    } else {
+                        Log.i("TestRoom", "getPostsFromRoom: get from Room")
+                        _responseWithCounts.postValue(it)
+                    }
+                }
+            }
+        }
+        return _responseWithCounts
     }
 
 

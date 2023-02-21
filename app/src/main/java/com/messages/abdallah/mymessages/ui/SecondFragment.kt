@@ -56,8 +56,8 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Toast.makeText(requireContext(), argsId.toString(), Toast.LENGTH_LONG).show()
-        Toast.makeText(requireContext(), MsgTypes_name, Toast.LENGTH_LONG).show()
+        //Toast.makeText(requireContext(), argsId.toString(), Toast.LENGTH_LONG).show()
+        //Toast.makeText(requireContext(), MsgTypes_name, Toast.LENGTH_LONG).show()
 
         setUpRv()
 

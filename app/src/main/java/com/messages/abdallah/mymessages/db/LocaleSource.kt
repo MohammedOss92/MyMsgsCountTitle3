@@ -3,7 +3,9 @@ package com.messages.abdallah.mymessages.db
 import android.content.Context
 import com.messages.abdallah.mymessages.db.Dao.MsgsDao
 import com.messages.abdallah.mymessages.db.Dao.MsgsTypesDao
+import com.messages.abdallah.mymessages.models.MsgModelWithTitle
 import com.messages.abdallah.mymessages.models.MsgsModel
+import com.messages.abdallah.mymessages.models.MsgsTypeWithCount
 import com.messages.abdallah.mymessages.models.MsgsTypesModel
 
 class LocaleSource(context: Context) {
@@ -32,8 +34,16 @@ class LocaleSource(context: Context) {
         return TypesDao?.getMsgsTypes_Dao()!!
     }
 
+    suspend fun getMsgsTypesWithCounts(): List<MsgsTypeWithCount>?{
+        return TypesDao?.getAllMsgTypesWithCounts()
+    }
+
     suspend fun getMsgs_Dao(id:Int): List<MsgsModel> {
         return Msgs_Dao?.getAllMsgsDao(id)!!
+    }
+
+    suspend fun getMsgsWithTitle(id: Int): List<MsgModelWithTitle>{
+        return Msgs_Dao?.getAllMsgsDaoWithTitle(id)!!
     }
 
     suspend fun insertPosts(posts: List<MsgsTypesModel>) {

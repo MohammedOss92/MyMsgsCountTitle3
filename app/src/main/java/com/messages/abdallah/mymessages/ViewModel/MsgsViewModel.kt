@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.messages.abdallah.mymessages.api.ApiService
 import com.messages.abdallah.mymessages.db.PostDatabas
+import com.messages.abdallah.mymessages.models.MsgModelWithTitle
 import com.messages.abdallah.mymessages.models.MsgsModel
 import com.messages.abdallah.mymessages.repository.MsgsRepo
 import com.messages.abdallah.mymessages.repository.MsgsTypesRepo
@@ -24,6 +25,8 @@ class MsgsViewModel constructor(private val msgsRepo:MsgsRepo):ViewModel() {
     private val retrofitService = ApiService.provideRetrofitInstance()
 
     private val _response = MutableLiveData<List<MsgsModel>>()
+
+    private val _responseWithTitle= MutableLiveData<List<MsgModelWithTitle>>()
 
     suspend fun getAllMsgs(ID_Type_id:Int) :MutableLiveData<List<MsgsModel>> {
 
@@ -42,9 +45,9 @@ class MsgsViewModel constructor(private val msgsRepo:MsgsRepo):ViewModel() {
         return _response
     }
 
-    fun getMsgsFromRoom_by_id(ID_Type_id:Int,context: Context) :MutableLiveData<List<MsgsModel>>{
+    fun getMsgsFromRoom_by_id(ID_Type_id:Int,context: Context) :MutableLiveData<List<MsgModelWithTitle>>{
         viewModelScope.launch {
-            val response = msgsRepo.getMsgs_Dao(ID_Type_id)
+            val response = msgsRepo.getMsgWithTitle(ID_Type_id)
             withContext(Dispatchers.Main) {
                 if (response.isEmpty()) {
                     Log.i("TestRoom", "getPostsFromRoom: will cal api")
@@ -56,11 +59,11 @@ class MsgsViewModel constructor(private val msgsRepo:MsgsRepo):ViewModel() {
                     }
                 } else {
                     Log.i("TestRoom", "getPostsFromRoom: get from Room")
-                    _response.postValue(response)
+                    _responseWithTitle.postValue(response)
                 }
             }
         }
-        return _response
+        return _responseWithTitle
     }
 
 

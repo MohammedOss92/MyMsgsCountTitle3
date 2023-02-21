@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.messages.abdallah.mymessages.R
 import com.messages.abdallah.mymessages.databinding.MsgstypeslayoutBinding
+import com.messages.abdallah.mymessages.models.MsgsTypeWithCount
 import com.messages.abdallah.mymessages.models.MsgsTypesModel
 
 class MsgsTypes_Adapter : RecyclerView.Adapter<MsgsTypes_Adapter.MyViewHolder>() {
@@ -20,20 +21,20 @@ class MsgsTypes_Adapter : RecyclerView.Adapter<MsgsTypes_Adapter.MyViewHolder>()
         init {
             binding.root.setOnClickListener {
 //                onItemClick?.invoke(msgsTypesModel[layoutPosition].id,msgsTypesModel[layoutPosition].MsgTypes!!)
-                onItemClick?.invoke(msgsTypesModel[layoutPosition].id)
+                onItemClick?.invoke(msgsTypesModel[layoutPosition].msgTypes?.id?:0)
 
             }
         }
 
     }
 
-    private val diffCallback = object : DiffUtil.ItemCallback<MsgsTypesModel>(){
-        override fun areItemsTheSame(oldItem: MsgsTypesModel, newItem: MsgsTypesModel): Boolean {
-            return oldItem.id == newItem.id
+    private val diffCallback = object : DiffUtil.ItemCallback<MsgsTypeWithCount>(){
+        override fun areItemsTheSame(oldItem: MsgsTypeWithCount, newItem: MsgsTypeWithCount): Boolean {
+            return oldItem.msgTypes?.id == newItem.msgTypes?.id
 
         }
 
-        override fun areContentsTheSame(oldItem: MsgsTypesModel, newItem: MsgsTypesModel): Boolean {
+        override fun areContentsTheSame(oldItem: MsgsTypeWithCount, newItem: MsgsTypeWithCount): Boolean {
             return newItem == oldItem
         }
 
@@ -41,7 +42,7 @@ class MsgsTypes_Adapter : RecyclerView.Adapter<MsgsTypes_Adapter.MyViewHolder>()
 
     private val differ = AsyncListDiffer(this, diffCallback)
 
-    var msgsTypesModel: List<MsgsTypesModel>
+    var msgsTypesModel: List<MsgsTypeWithCount>
         get() = differ.currentList
         set(value) {
             differ.submitList(value)
@@ -54,11 +55,11 @@ class MsgsTypes_Adapter : RecyclerView.Adapter<MsgsTypes_Adapter.MyViewHolder>()
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val current_msgsTypesModel = msgsTypesModel[position]
         holder.binding.apply {
-            tvTitle.text = current_msgsTypesModel.MsgTypes
+            tvTitle.text = current_msgsTypesModel.msgTypes?.MsgTypes
             newMsg.setImageResource(R.drawable.new_msg)
-            tvCounter.text = (0.toString())
+            tvCounter.text = (current_msgsTypesModel.subCount.toString())
 
-            if (current_msgsTypesModel.new_msg == 0) {
+            if (current_msgsTypesModel.msgTypes?.new_msg == 0) {
 
                 newMsg.setVisibility(View.INVISIBLE)
             } else {

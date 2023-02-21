@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.messages.abdallah.mymessages.R
 import com.messages.abdallah.mymessages.ViewModel.MsgsTypesViewModel
 import com.messages.abdallah.mymessages.ViewModel.MsgsViewModel
@@ -90,12 +91,16 @@ class FirstFragment : Fragment() {
 //            binding.rcMsgTypes.adapter = msgstypesAdapter
 //        }
 
-        viewModel.getPostsFromRoom(requireContext() as MainActivity).observe(requireActivity()) { listTvShows ->
+        viewModel.getPostsFromRoomWithCounts(requireContext() as MainActivity).observe(requireActivity()) { listTvShows ->
        //     Log.e("tessst",listTvShows.size.toString()+"  adapter")
+            msgstypesAdapter.stateRestorationPolicy= RecyclerView.Adapter.StateRestorationPolicy.ALLOW
 
-            msgstypesAdapter.msgsTypesModel = listTvShows
-            binding.rcMsgTypes.layoutManager = LinearLayoutManager(requireContext())
-            binding.rcMsgTypes.adapter = msgstypesAdapter
+            if(binding.rcMsgTypes.adapter == null){
+                msgstypesAdapter.msgsTypesModel = listTvShows
+                binding.rcMsgTypes.layoutManager = LinearLayoutManager(requireContext())
+                binding.rcMsgTypes.adapter = msgstypesAdapter
+            }
+
 
         }
 

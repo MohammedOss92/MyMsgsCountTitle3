@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.messages.abdallah.mymessages.R
 import com.messages.abdallah.mymessages.databinding.MsgsDesignBinding
+import com.messages.abdallah.mymessages.models.MsgModelWithTitle
 import com.messages.abdallah.mymessages.models.MsgsModel
 
 class Msgs_Adapter : RecyclerView.Adapter<Msgs_Adapter.MyViewHolder>() {
@@ -16,19 +17,19 @@ class Msgs_Adapter : RecyclerView.Adapter<Msgs_Adapter.MyViewHolder>() {
 
     }
 
-    private val diffCallback = object :DiffUtil.ItemCallback<MsgsModel>(){
-        override fun areItemsTheSame(oldItem: MsgsModel, newItem: MsgsModel): Boolean {
-            return oldItem.id == newItem.id
+    private val diffCallback = object :DiffUtil.ItemCallback<MsgModelWithTitle>(){
+        override fun areItemsTheSame(oldItem: MsgModelWithTitle, newItem: MsgModelWithTitle): Boolean {
+            return oldItem.msgModel?.id == newItem.msgModel?.id
         }
 
-        override fun areContentsTheSame(oldItem: MsgsModel, newItem: MsgsModel): Boolean {
+        override fun areContentsTheSame(oldItem: MsgModelWithTitle, newItem: MsgModelWithTitle): Boolean {
             return newItem == oldItem
         }
 
     }
 
     private val differ = AsyncListDiffer(this, diffCallback)
-    var msgsModel: List<MsgsModel>
+    var msgsModel: List<MsgModelWithTitle>
         get() = differ.currentList
         set(value) {
             differ.submitList(value)
@@ -41,11 +42,11 @@ class Msgs_Adapter : RecyclerView.Adapter<Msgs_Adapter.MyViewHolder>() {
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val current_msgsModel = msgsModel[position]
         holder.binding.apply {
-            tvTitleM.text=current_msgsModel.ID_Type_id.toString()
-            tvMsgM.text=current_msgsModel.MessageName
+            tvTitleM.text=current_msgsModel.typeTitle.toString()
+            tvMsgM.text=current_msgsModel.msgModel?.MessageName
             newMsgM.setImageResource(R.drawable.new_msg)
 
-            if (current_msgsModel.new_msgs == 0){
+            if (current_msgsModel.msgModel?.new_msgs == 0){
 
                 newMsgM.setVisibility(View.INVISIBLE)
             }

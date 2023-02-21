@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MyMsgsNew2NavComponentMvvM-master.iml" filepath="$PROJECT_DIR$/.idea/modules/MyMsgsNew2NavComponentMvvM-master.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MyMsgsNew2NavComponentMvvM-master.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MyMsgsNew2NavComponentMvvM-master.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MyMsgsNew2NavComponentMvvM-master.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MyMsgsNew2NavComponentMvvM-master.app.androidTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MyMsgsNew2NavComponentMvvM-master.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MyMsgsNew2NavComponentMvvM-master.app.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MyMsgsNew2NavComponentMvvM-master.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MyMsgsNew2NavComponentMvvM-master.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/rooomdb.iml" filepath="$PROJECT_DIR$/.idea/modules/rooomdb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/rooomdb.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/rooomdb.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/rooomdb.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/rooomdb.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/rooomdb.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/rooomdb.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/rooomdb.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/rooomdb.app.unitTest.iml" />
     </modules>
   </component>
 </project>

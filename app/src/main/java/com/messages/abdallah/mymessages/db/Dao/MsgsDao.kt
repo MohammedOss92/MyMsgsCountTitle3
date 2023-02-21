@@ -20,7 +20,7 @@ interface MsgsDao {
     @Query("Select * from msg_table where ID_Type_id =:ID_Type_id")
     suspend fun getAllMsgsDao(ID_Type_id: Int): List<MsgsModel>
 
-    @Query("select e.*, c.MsgTypes as typeTitle from  msg_table e left join msg_types_table c  on  c.id = e.ID_Type_id where e.ID_Type_id=:ID_Type_id")
+    @Query("select e.*, c.MsgTypes as typeTitle from  msg_table e left join msg_types_table c  on  c.id = e.ID_Type_id where e.ID_Type_id=:ID_Type_id order by id DESC")
     suspend fun getAllMsgsDaoWithTitle(ID_Type_id: Int): List<MsgModelWithTitle>
 
 //    @Query(" select m.*,t.TypeDescription from msg_table m" +

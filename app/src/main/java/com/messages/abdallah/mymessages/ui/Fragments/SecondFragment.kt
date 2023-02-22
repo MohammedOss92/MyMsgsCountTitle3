@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
@@ -59,6 +60,7 @@ class SecondFragment : Fragment() {
         //Toast.makeText(requireContext(), MsgTypes_name, Toast.LENGTH_LONG).show()
 
         setUpRv()
+        adapterOnClick()
 
     }
 
@@ -67,6 +69,11 @@ class SecondFragment : Fragment() {
         _binding = null
     }
 
+    private fun adapterOnClick(){
+        msgsAdapter.onItemClick = {
+            Toast.makeText(requireContext(), "it.toString()", Toast.LENGTH_LONG).show()
+        }
+    }
 
     private  fun setUpRv() = viewModel.viewModelScope.launch {
 

@@ -13,13 +13,13 @@ import com.messages.abdallah.mymessages.models.MsgsModel
 
 class Msgs_Adapter : RecyclerView.Adapter<Msgs_Adapter.MyViewHolder>() {
 
-
+    var onItemClick: (() -> Unit)? = null
 
     inner class MyViewHolder(val binding: MsgsDesignBinding) : RecyclerView.ViewHolder(binding.root) {
+
         init {
             binding.favBtn.setOnClickListener {
-//                onItemClick?.invoke(msgsTypesModel[layoutPosition].id,msgsTypesModel[layoutPosition].MsgTypes!!)
-
+                onItemClick?.invoke()
 
             }
         }

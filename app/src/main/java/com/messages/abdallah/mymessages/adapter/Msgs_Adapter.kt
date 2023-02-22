@@ -13,8 +13,16 @@ import com.messages.abdallah.mymessages.models.MsgsModel
 
 class Msgs_Adapter : RecyclerView.Adapter<Msgs_Adapter.MyViewHolder>() {
 
-    inner class MyViewHolder(val binding: MsgsDesignBinding) : RecyclerView.ViewHolder(binding.root) {
 
+
+    inner class MyViewHolder(val binding: MsgsDesignBinding) : RecyclerView.ViewHolder(binding.root) {
+        init {
+            binding.favBtn.setOnClickListener {
+//                onItemClick?.invoke(msgsTypesModel[layoutPosition].id,msgsTypesModel[layoutPosition].MsgTypes!!)
+
+
+            }
+        }
     }
 
     private val diffCallback = object :DiffUtil.ItemCallback<MsgModelWithTitle>(){

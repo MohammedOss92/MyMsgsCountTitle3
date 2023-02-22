@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/firsFragment"
-        android:name="com.messages.abdallah.mymessages.ui.FirstFragment"
+        android:name="com.messages.abdallah.mymessages.ui.Fragments.FirstFragment"
         android:label="fragment_firs"
         tools:layout="@layout/fragment_first" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/secondFragment"
-        android:name="com.messages.abdallah.mymessages.ui.SecondFragment"
+        android:name="com.messages.abdallah.mymessages.ui.Fragments.SecondFragment"
         android:label="fragment_second"
         tools:layout="@layout/fragment_second" >
         <argument
@@ -26,4 +26,9 @@
 <!--            android:name="msgType"-->
 <!--            app:argType="string" />-->
     </fragment>
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.messages.abdallah.mymessages.ui.Fragments.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" />
 </navigation>

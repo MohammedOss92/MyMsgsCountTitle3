@@ -1,24 +1,21 @@
-package com.messages.abdallah.mymessages.ui
+package com.messages.abdallah.mymessages.ui.Fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.messages.abdallah.mymessages.ViewModel.MsgsViewModel
-import com.messages.abdallah.mymessages.ViewModel.MyViewModelFactory
 import com.messages.abdallah.mymessages.ViewModel.ViewModelFactory
 import com.messages.abdallah.mymessages.adapter.Msgs_Adapter
 import com.messages.abdallah.mymessages.api.ApiService
 import com.messages.abdallah.mymessages.databinding.FragmentSecondBinding
 import com.messages.abdallah.mymessages.db.LocaleSource
 import com.messages.abdallah.mymessages.repository.MsgsRepo
-import com.messages.abdallah.mymessages.repository.MsgsTypesRepo
+import com.messages.abdallah.mymessages.ui.MainActivity
 import kotlinx.coroutines.launch
 
 

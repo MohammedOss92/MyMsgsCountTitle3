@@ -14,6 +14,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.messages.abdallah.mymessages.R
 import com.messages.abdallah.mymessages.ViewModel.MsgsTypesViewModel
 import com.messages.abdallah.mymessages.ViewModel.MsgsViewModel
@@ -26,6 +29,7 @@ import com.messages.abdallah.mymessages.repository.MsgsTypesRepo
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var bottomNav : BottomNavigationView
     private lateinit var binding: ActivityMainBinding
     lateinit var viewModel: MsgsTypesViewModel
     lateinit var viewModel2: MsgsViewModel
@@ -41,10 +45,24 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 //        setSupportActionBar(binding.atoolbar)
+        bottomNav = findViewById(R.id.bottomNav)
 
         navController =
-            findNavController(R.id.nav_host_fragment_activity_main) //Initialising navController
+            findNavController(R.id.nav_host_fragment_activity_main)
 
+        appBarConfiguration = AppBarConfiguration(setOf(R.id.firsFragment,R.id.favoriteFragment))
+//        setupActionBarWithNavController(navController,appBarConfiguration)
+        bottomNav.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if(destination.id == R.id.secondFragment) {
+
+                bottomNav.visibility = View.GONE
+            } else {
+
+                bottomNav.visibility = View.VISIBLE
+            }
+        }
 
         val retrofitService = ApiService.provideRetrofitInstance()
         val mainRepository = MsgsTypesRepo(retrofitService, LocaleSource(this))

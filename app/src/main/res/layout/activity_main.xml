@@ -31,6 +31,16 @@
         app:navGraph="@navigation/nav_graph" />
 
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottomNav"
+        android:background="#fff"
+        app:elevation="10dp"
+        app:menu="@menu/bottom_menu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 <!--  -->
 
 <!-- السطر التالي انت مو محتاجه ثاني بس ممكن تتركه مؤقتا من باب الاحتياط -->

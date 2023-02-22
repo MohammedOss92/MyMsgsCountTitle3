@@ -1,4 +1,4 @@
-package com.messages.abdallah.mymessages.ui
+package com.messages.abdallah.mymessages.ui.Fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +9,6 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.messages.abdallah.mymessages.R
 import com.messages.abdallah.mymessages.ViewModel.MsgsTypesViewModel
 import com.messages.abdallah.mymessages.ViewModel.MsgsViewModel
 import com.messages.abdallah.mymessages.ViewModel.MyViewModelFactory
@@ -21,6 +20,7 @@ import com.messages.abdallah.mymessages.databinding.FragmentFirstBinding
 import com.messages.abdallah.mymessages.db.LocaleSource
 import com.messages.abdallah.mymessages.repository.MsgsRepo
 import com.messages.abdallah.mymessages.repository.MsgsTypesRepo
+import com.messages.abdallah.mymessages.ui.MainActivity
 
 import kotlinx.coroutines.launch
 

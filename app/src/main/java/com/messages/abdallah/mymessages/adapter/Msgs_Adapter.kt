@@ -19,6 +19,7 @@ class Msgs_Adapter : RecyclerView.Adapter<Msgs_Adapter.MyViewHolder>() {
 
         init {
             binding.favBtn.setOnClickListener {
+
                 onItemClick?.invoke()
 
             }

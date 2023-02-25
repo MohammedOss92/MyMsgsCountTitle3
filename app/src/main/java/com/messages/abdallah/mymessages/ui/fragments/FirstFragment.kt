@@ -1,4 +1,4 @@
-package com.messages.abdallah.mymessages.ui.Fragments
+package com.messages.abdallah.mymessages.ui.fragments
 
 import android.os.Bundle
 import android.util.Log

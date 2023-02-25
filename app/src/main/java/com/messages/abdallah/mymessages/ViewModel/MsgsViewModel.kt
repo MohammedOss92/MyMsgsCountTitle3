@@ -6,16 +6,14 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import android.util.Log
 import android.widget.Toast
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.messages.abdallah.mymessages.api.ApiService
-import com.messages.abdallah.mymessages.db.PostDatabas
+import com.messages.abdallah.mymessages.models.FavoriteModel
 import com.messages.abdallah.mymessages.models.MsgModelWithTitle
 import com.messages.abdallah.mymessages.models.MsgsModel
 import com.messages.abdallah.mymessages.repository.MsgsRepo
-import com.messages.abdallah.mymessages.repository.MsgsTypesRepo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -66,6 +64,11 @@ class MsgsViewModel constructor(private val msgsRepo:MsgsRepo):ViewModel() {
         return _responseWithTitle
     }
 
+    /****************/
+     fun add_fav(fav:List<FavoriteModel>)= viewModelScope.launch {
+        msgsRepo.add_fav(fav)
+    }
+    /*********/
 
 
     suspend fun refreshMsgs(ID_Type_id:Int) {

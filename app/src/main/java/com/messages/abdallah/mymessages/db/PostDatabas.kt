@@ -5,16 +5,19 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.messages.abdallah.mymessages.db.Dao.FavoriteDao
 import com.messages.abdallah.mymessages.db.Dao.MsgsDao
 import com.messages.abdallah.mymessages.db.Dao.MsgsTypesDao
+import com.messages.abdallah.mymessages.models.FavoriteModel
 import com.messages.abdallah.mymessages.models.MsgsModel
 import com.messages.abdallah.mymessages.models.MsgsTypesModel
 
-@Database(entities = [MsgsTypesModel::class,MsgsModel::class], version = 3, exportSchema = false)
+@Database(entities = [MsgsTypesModel::class,MsgsModel::class,FavoriteModel::class], version =5, exportSchema = false)
 abstract class PostDatabas : RoomDatabase() {
 
     abstract fun TypesDao():MsgsTypesDao
     abstract fun Msgs_Dao(): MsgsDao
+    abstract fun FavoriteDao():FavoriteDao
 
     companion object{
 

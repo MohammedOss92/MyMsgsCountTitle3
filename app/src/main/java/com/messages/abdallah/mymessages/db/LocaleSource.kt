@@ -1,17 +1,17 @@
 package com.messages.abdallah.mymessages.db
 
 import android.content.Context
+import com.messages.abdallah.mymessages.db.Dao.FavoriteDao
 import com.messages.abdallah.mymessages.db.Dao.MsgsDao
 import com.messages.abdallah.mymessages.db.Dao.MsgsTypesDao
-import com.messages.abdallah.mymessages.models.MsgModelWithTitle
-import com.messages.abdallah.mymessages.models.MsgsModel
-import com.messages.abdallah.mymessages.models.MsgsTypeWithCount
-import com.messages.abdallah.mymessages.models.MsgsTypesModel
+import com.messages.abdallah.mymessages.models.*
 
 class LocaleSource(context: Context) {
 
     private var TypesDao: MsgsTypesDao?
     private var Msgs_Dao: MsgsDao?
+    private var FavoriteDao: FavoriteDao?
+
     var ID_Type_id: Int?=null
 
 
@@ -19,6 +19,8 @@ class LocaleSource(context: Context) {
         val dataBase = PostDatabas.getInstance(context.applicationContext)
         TypesDao = dataBase.TypesDao()
         Msgs_Dao = dataBase.Msgs_Dao()
+        FavoriteDao = dataBase.FavoriteDao()
+
     }
 
     companion object {
@@ -54,10 +56,13 @@ class LocaleSource(context: Context) {
         Msgs_Dao?.insert_msgs(msgs)!!
     }
 
-
-
     suspend fun deletePosts() {
         TypesDao?.deleteALlPosts()
+    }
+
+    /************************/
+    suspend fun add_fav(fav:List<FavoriteModel>){
+        FavoriteDao?.add_fav(fav)
     }
 
 }

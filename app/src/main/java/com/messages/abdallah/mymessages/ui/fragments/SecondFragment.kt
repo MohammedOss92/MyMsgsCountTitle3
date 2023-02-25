@@ -1,4 +1,4 @@
-package com.messages.abdallah.mymessages.ui.Fragments
+package com.messages.abdallah.mymessages.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,6 +15,7 @@ import com.messages.abdallah.mymessages.adapter.Msgs_Adapter
 import com.messages.abdallah.mymessages.api.ApiService
 import com.messages.abdallah.mymessages.databinding.FragmentSecondBinding
 import com.messages.abdallah.mymessages.db.LocaleSource
+import com.messages.abdallah.mymessages.models.FavoriteModel
 import com.messages.abdallah.mymessages.repository.MsgsRepo
 import com.messages.abdallah.mymessages.ui.MainActivity
 import kotlinx.coroutines.launch
@@ -70,8 +71,11 @@ class SecondFragment : Fragment() {
     }
 
     private fun adapterOnClick(){
+        var fav:List<FavoriteModel>?=null
+
         msgsAdapter.onItemClick = {
             Toast.makeText(requireContext(), "it.toString()", Toast.LENGTH_LONG).show()
+            viewModel.add_fav(fav!!)
         }
     }
 
@@ -81,7 +85,6 @@ class SecondFragment : Fragment() {
 //            adapter = msgstypesAdapter
 //            setHasFixedSize(true)
 //        }
-
 
         viewModel.getMsgsFromRoom_by_id(argsId,requireContext()).observe(viewLifecycleOwner) { listShows ->
             msgsAdapter.stateRestorationPolicy=RecyclerView.Adapter.StateRestorationPolicy.ALLOW

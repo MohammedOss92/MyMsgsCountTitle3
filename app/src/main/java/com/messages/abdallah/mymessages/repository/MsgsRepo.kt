@@ -19,9 +19,11 @@ class MsgsRepo constructor(val apiService: ApiService,private val localeSource: 
     }
 
     /***************************/
-    suspend fun add_fav (fav:List<FavoriteModel>){
+    suspend fun add_fav (fav: List<FavoriteModel>){
 
             localeSource.add_fav(fav)
 
     }
+
+    suspend fun getAllFav()=localeSource.getAllFav()
 }

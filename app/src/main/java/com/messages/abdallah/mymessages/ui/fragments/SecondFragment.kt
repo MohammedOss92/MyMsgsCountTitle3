@@ -71,11 +71,11 @@ class SecondFragment : Fragment() {
     }
 
     private fun adapterOnClick(){
-        var fav:List<FavoriteModel>?=null
+        var fav= emptyList<FavoriteModel>()
 
         msgsAdapter.onItemClick = {
-            Toast.makeText(requireContext(), "it.toString()", Toast.LENGTH_LONG).show()
-            viewModel.add_fav(fav!!)
+            Toast.makeText(requireContext(), "ششششش", Toast.LENGTH_LONG).show()
+            viewModel.add_fav(fav)
         }
     }
 

@@ -6,6 +6,7 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,12 +14,18 @@ import com.messages.abdallah.mymessages.api.ApiService
 import com.messages.abdallah.mymessages.models.FavoriteModel
 import com.messages.abdallah.mymessages.models.MsgModelWithTitle
 import com.messages.abdallah.mymessages.models.MsgsModel
+import com.messages.abdallah.mymessages.models.MsgsTypesModel
 import com.messages.abdallah.mymessages.repository.MsgsRepo
+import com.messages.abdallah.mymessages.ui.MainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class MsgsViewModel constructor(private val msgsRepo:MsgsRepo):ViewModel() {
+
+    private val __response = MutableLiveData<List<FavoriteModel>>()
+    val responseMsgsFav: LiveData<List<FavoriteModel>>
+        get() = __response
 
     private val retrofitService = ApiService.provideRetrofitInstance()
 
@@ -65,8 +72,15 @@ class MsgsViewModel constructor(private val msgsRepo:MsgsRepo):ViewModel() {
     }
 
     /****************/
-     fun add_fav(fav:List<FavoriteModel>)= viewModelScope.launch {
+     fun add_fav(fav: List<FavoriteModel>)= viewModelScope.launch {
         msgsRepo.add_fav(fav)
+    }
+
+    fun getFav(context: MainActivity): MutableLiveData<List<FavoriteModel>> {
+        viewModelScope.launch {
+            msgsRepo.getAllFav()
+        }
+        return __response
     }
     /*********/
 

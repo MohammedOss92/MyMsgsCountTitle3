@@ -61,8 +61,12 @@ class LocaleSource(context: Context) {
     }
 
     /************************/
-    suspend fun add_fav(fav:List<FavoriteModel>){
+    suspend fun add_fav(fav: List<FavoriteModel>){
         FavoriteDao?.add_fav(fav)
+    }
+
+    suspend fun getAllFav(): List<FavoriteModel>{
+        return FavoriteDao?.getAllFav()!!
     }
 
 }

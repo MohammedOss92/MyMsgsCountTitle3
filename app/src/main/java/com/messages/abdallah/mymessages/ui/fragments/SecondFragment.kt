@@ -1,6 +1,7 @@
 package com.messages.abdallah.mymessages.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +28,7 @@ class SecondFragment : Fragment() {
     private val binding get() = _binding!!
     private var argsId = -1
     private var MsgTypes_name = ""
+    lateinit var favs:List<FavoriteModel>
 
 
     private val msgsAdapter by lazy { Msgs_Adapter() }
@@ -71,11 +73,23 @@ class SecondFragment : Fragment() {
     }
 
     private fun adapterOnClick(){
-        var fav= emptyList<FavoriteModel>()
 
         msgsAdapter.onItemClick = {
-            Toast.makeText(requireContext(), "ششششش", Toast.LENGTH_LONG).show()
-            viewModel.add_fav(fav)
+            val fav= FavoriteModel(it.msgModel!!.id,it.msgModel!!.MessageName,it.typeTitle,it.msgModel!!.new_msgs,it.msgModel!!.ID_Type_id)
+            // check if item is favorite or not
+            if (it.msgModel!!.is_fav){
+                viewModel.update_fav(it.msgModel!!.id,false) // update favorite item state
+                viewModel.delete_fav(fav) //delete item from db
+                Toast.makeText(requireContext(),"item removed from favorites",Toast.LENGTH_LONG).show()
+                setUpRv()
+            }else{
+                Toast.makeText(requireContext(), it.msgModel!!.id.toString(), Toast.LENGTH_LONG).show()
+                viewModel.add_fav(fav) // add item to db
+                viewModel.update_fav(it.msgModel!!.id,true)
+                Toast.makeText(requireContext(),"item added to favorites",Toast.LENGTH_LONG).show()
+                setUpRv()
+            }
+
         }
     }
 
@@ -86,11 +100,16 @@ class SecondFragment : Fragment() {
 //            setHasFixedSize(true)
 //        }
 
+
         viewModel.getMsgsFromRoom_by_id(argsId,requireContext()).observe(viewLifecycleOwner) { listShows ->
             msgsAdapter.stateRestorationPolicy=RecyclerView.Adapter.StateRestorationPolicy.ALLOW
             if(binding.rcMsgs.adapter == null) {
                 msgsAdapter.msgsModel = listShows
                 binding.rcMsgs.adapter = msgsAdapter
+            }else{
+                //update adapter list
+                msgsAdapter.msgsModel = listShows
+                msgsAdapter.notifyDataSetChanged()
             }
         }
     }

@@ -8,19 +8,20 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.messages.abdallah.mymessages.R
 import com.messages.abdallah.mymessages.databinding.MsgsDesignBinding
+import com.messages.abdallah.mymessages.models.FavoriteModel
 import com.messages.abdallah.mymessages.models.MsgModelWithTitle
 import com.messages.abdallah.mymessages.models.MsgsModel
 
 class Msgs_Adapter : RecyclerView.Adapter<Msgs_Adapter.MyViewHolder>() {
 
-    var onItemClick: (() -> Unit)? = null
+    var onItemClick: ((item:MsgModelWithTitle) -> Unit)? = null
 
     inner class MyViewHolder(val binding: MsgsDesignBinding) : RecyclerView.ViewHolder(binding.root) {
 
         init {
             binding.favBtn.setOnClickListener {
 
-                onItemClick?.invoke()
+                onItemClick?.invoke(msgsModel[adapterPosition])
 
             }
         }
@@ -44,6 +45,10 @@ class Msgs_Adapter : RecyclerView.Adapter<Msgs_Adapter.MyViewHolder>() {
             differ.submitList(value)
         }
 
+
+
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(MsgsDesignBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
@@ -61,6 +66,13 @@ class Msgs_Adapter : RecyclerView.Adapter<Msgs_Adapter.MyViewHolder>() {
             }
             else {
                 newMsgM.setVisibility(View.VISIBLE)
+            }
+
+            // check if the item is favorite or not
+            if (current_msgsModel.msgModel!!.is_fav){
+                favBtn.setImageResource(R.drawable.baseline_favorite_true)
+            }else{
+                favBtn.setImageResource(R.drawable.baseline_favorite_border_false)
             }
         }
     }

@@ -11,10 +11,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.messages.abdallah.mymessages.api.ApiService
-import com.messages.abdallah.mymessages.models.FavoriteModel
-import com.messages.abdallah.mymessages.models.MsgModelWithTitle
-import com.messages.abdallah.mymessages.models.MsgsModel
-import com.messages.abdallah.mymessages.models.MsgsTypesModel
+import com.messages.abdallah.mymessages.models.*
 import com.messages.abdallah.mymessages.repository.MsgsRepo
 import com.messages.abdallah.mymessages.ui.MainActivity
 import kotlinx.coroutines.Dispatchers

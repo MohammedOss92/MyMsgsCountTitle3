@@ -83,7 +83,7 @@ class SecondFragment : Fragment() {
                 Toast.makeText(requireContext(),"item removed from favorites",Toast.LENGTH_LONG).show()
                 setUpRv()
             }else{
-                Toast.makeText(requireContext(), it.msgModel!!.id.toString(), Toast.LENGTH_LONG).show()
+//                Toast.makeText(requireContext(), it.msgModel!!.id.toString(), Toast.LENGTH_LONG).show()
                 viewModel.add_fav(fav) // add item to db
                 viewModel.update_fav(it.msgModel!!.id,true)
                 Toast.makeText(requireContext(),"item added to favorites",Toast.LENGTH_LONG).show()

@@ -15,7 +15,7 @@ interface FavoriteDao {
     @Query("select e.*, c.MsgTypes as typeTitle from  Favorite_table " +
             "e left join msg_types_table c  on " +
             " c.id = e.ID_Type_id where " +
-            "e.ID_Type_id order by id DESC")
+            "e.ID_Type_id order by c.id DESC")
     suspend fun getAllFav(): List<FavoriteModel>
 
     // delete favorite item from db

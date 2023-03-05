@@ -1,5 +1,7 @@
 package com.messages.abdallah.mymessages.adapter
 
+import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,15 +16,17 @@ import com.messages.abdallah.mymessages.models.MsgsModel
 
 class Msgs_Adapter : RecyclerView.Adapter<Msgs_Adapter.MyViewHolder>() {
 
-    var onItemClick: ((item:MsgModelWithTitle) -> Unit)? = null
+    var onItemClick: ((item:MsgModelWithTitle,position:Int) -> Unit)? = null
 
+    @SuppressLint("NotifyDataSetChanged")
     inner class MyViewHolder(val binding: MsgsDesignBinding) : RecyclerView.ViewHolder(binding.root) {
 
+
         init {
+            Log.e("tessst",msgsModel[0].msgModel!!.is_fav.toString())
             binding.favBtn.setOnClickListener {
 
-                onItemClick?.invoke(msgsModel[adapterPosition])
-
+                onItemClick?.invoke(msgsModel[adapterPosition],adapterPosition)
             }
         }
     }
@@ -54,6 +58,7 @@ class Msgs_Adapter : RecyclerView.Adapter<Msgs_Adapter.MyViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        Log.e("tessst","notifyyyy")
         val current_msgsModel = msgsModel[position]
         holder.binding.apply {
             tvTitleM.text=current_msgsModel.typeTitle.toString()

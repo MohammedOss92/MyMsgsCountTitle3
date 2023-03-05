@@ -17,6 +17,7 @@ import com.messages.abdallah.mymessages.api.ApiService
 import com.messages.abdallah.mymessages.databinding.FragmentSecondBinding
 import com.messages.abdallah.mymessages.db.LocaleSource
 import com.messages.abdallah.mymessages.models.FavoriteModel
+import com.messages.abdallah.mymessages.models.MsgModelWithTitle
 import com.messages.abdallah.mymessages.repository.MsgsRepo
 import com.messages.abdallah.mymessages.ui.MainActivity
 import kotlinx.coroutines.launch
@@ -28,8 +29,6 @@ class SecondFragment : Fragment() {
     private val binding get() = _binding!!
     private var argsId = -1
     private var MsgTypes_name = ""
-    lateinit var favs:List<FavoriteModel>
-
 
     private val msgsAdapter by lazy { Msgs_Adapter() }
 
@@ -46,7 +45,7 @@ class SecondFragment : Fragment() {
         argsId = SecondFragmentArgs.fromBundle(requireArguments()).id
 //        MsgTypes_name = SecondFragmentArgs.fromBundle(requireArguments()).msgType
         (activity as MainActivity).fragment = 2
-       // (activity as MainActivity).id = argsId
+        // (activity as MainActivity).id = argsId
     }
 
     override fun onCreateView(
@@ -74,19 +73,18 @@ class SecondFragment : Fragment() {
 
     private fun adapterOnClick(){
 
-        msgsAdapter.onItemClick = {
+        msgsAdapter.onItemClick = { it: MsgModelWithTitle, i: Int ->
             val fav= FavoriteModel(it.msgModel!!.id,it.msgModel!!.MessageName,it.typeTitle,it.msgModel!!.new_msgs,it.msgModel!!.ID_Type_id)
             // check if item is favorite or not
             if (it.msgModel!!.is_fav){
                 viewModel.update_fav(it.msgModel!!.id,false) // update favorite item state
                 viewModel.delete_fav(fav) //delete item from db
-                Toast.makeText(requireContext(),"item removed from favorites",Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(),"item removed from favorites",Toast.LENGTH_SHORT).show()
                 setUpRv()
             }else{
-//                Toast.makeText(requireContext(), it.msgModel!!.id.toString(), Toast.LENGTH_LONG).show()
                 viewModel.add_fav(fav) // add item to db
                 viewModel.update_fav(it.msgModel!!.id,true)
-                Toast.makeText(requireContext(),"item added to favorites",Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(),"item added to favorites",Toast.LENGTH_SHORT).show()
                 setUpRv()
             }
 
@@ -103,14 +101,11 @@ class SecondFragment : Fragment() {
 
         viewModel.getMsgsFromRoom_by_id(argsId,requireContext()).observe(viewLifecycleOwner) { listShows ->
             msgsAdapter.stateRestorationPolicy=RecyclerView.Adapter.StateRestorationPolicy.ALLOW
-            if(binding.rcMsgs.adapter == null) {
-                msgsAdapter.msgsModel = listShows
-                binding.rcMsgs.adapter = msgsAdapter
-            }else{
-                //update adapter list
-                msgsAdapter.msgsModel = listShows
-                msgsAdapter.notifyDataSetChanged()
-            }
+
+            msgsAdapter.msgsModel = listShows
+            binding.rcMsgs.adapter = msgsAdapter
+            Log.e("tessst","enter111")
+
         }
     }
 }

@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        setSupportActionBar(binding.atoolbar)
+        setSupportActionBar(binding.toolbar)
         bottomNav = findViewById(R.id.bottomNav)
 
         navController =
@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity() {
 
     fun showprogressdialog() {
 
-        binding.progressBar.visibility = View.VISIBLE
+//        binding.progressBar.visibility = View.VISIBLE
       //  mprogressdaialog = Dialog(this)
       //  mprogressdaialog!!.setCancelable(false)
       //  mprogressdaialog!!.setContentView(R.layout.progress_dialog)
@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity() {
         Log.e("tesssst","entred")
         //  recreate()
        // mprogressdaialog!!.dismiss()
-        binding.progressBar.visibility = View.GONE
+//        binding.progressBar.visibility = View.GONE
         recreate()
 
     }
